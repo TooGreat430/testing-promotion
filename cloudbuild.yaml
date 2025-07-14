@@ -1,0 +1,25 @@
+steps:
+# STEP 1: Copy model artifact dari Project A ke Project B
+- name: gcr.io/cloud-builders/gsutil
+  id: CopyModel
+  args:
+    - '-m'
+    - cp
+    - '-r'
+    - 'gs://bdi_onprem_model_ml_versioning/model-7893904149199192064/custom-trained/2025-07-10T04:43:05.879566Z/model.bst'
+    - 'gs://testing-promotion-123/ml-prod-model/model.bst'
+
+# STEP 2: Set project B dan upload ke Model Registry
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  id: UploadModel
+  entrypoint: bash
+  args:
+    - '-c'
+    - |
+      gcloud config set project me-data-internal-sandbox
+
+      gcloud ai models upload \
+        --region=asia-southeast2 \
+        --display-name="xgboost_12345" \
+        --artifact-uri=gs://ml-prod-models-b/promoted-models/xgboost_12345/ \
+        --asia-docker.pkg.dev/vertex-ai/prediction/xgboost-cpu.1-7:latest
