@@ -1,3 +1,6 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 steps:
 # STEP 1: Copy model artifact dari Project A ke Project B
 - name: gcr.io/cloud-builders/gsutil
