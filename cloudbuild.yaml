@@ -10,7 +10,7 @@ steps:
     - cp
     - '-r'
     - 'gs://bdi_onprem_model_ml_versioning/model-promote/logistic_regression_20250714/model.pkl'
-    - 'gs://testing-promotion-123/ml-prod-model/xgboost_12345/model.pkl'
+    - 'gs://testing-promotion-123/ml-prod-model/model_12345/model.pkl'
 
 # STEP 2: Set project B dan upload ke Model Registry
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -24,5 +24,5 @@ steps:
       gcloud ai models upload \
         --region=asia-southeast2 \
         --display-name="xgboost_12345" \
-        --artifact-uri=gs://testing-promotion-123/ml-prod-model/xgboost_12345/ \
+        --artifact-uri=gs://testing-promotion-123/ml-prod-model/model_12345/ \
         --container-image-uri=asia-docker.pkg.dev/vertex-ai/prediction/xgboost-cpu.1-7:latest
