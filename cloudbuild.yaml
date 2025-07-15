@@ -23,6 +23,6 @@ steps:
 
       gcloud ai models upload \
         --region=asia-southeast2 \
-        --display-name="xgboost_12345" \
+        --display-name="model_promotion_12345" \
         --artifact-uri=gs://testing-promotion-123/ml-prod-model/model_12345/ \
         --container-image-uri=asia-docker.pkg.dev/vertex-ai/prediction/xgboost-cpu.1-7:latest
